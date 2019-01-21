@@ -1,6 +1,6 @@
 /* global firebase */
 $(document).ready(function () {
-console.log("start");
+    console.log("start");
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyA07r26rUaxW497jgkFXNofa6-XnKpihDg",
@@ -25,7 +25,7 @@ console.log("start");
 
 
     function trainCal() {
-        
+
         console.log("trainCal Start");
         // firstTrain pushed back 1 year
         var firstTrainConverted = moment(firstTrain, MFormat).subtract(1, "years");
@@ -76,20 +76,22 @@ console.log("start");
 
     // This callback keeps the page updated when a value changes in firebase.
     database.ref().on("child_added", function (snapshot) {
- 
+
 
         // Console.log the "snapshot" value (a point-in-time representation of the database)
         console.log(snapshot.val());
 
         // Change the value of our vars to match the value in the database
-
         TrainName = snapshot.val().TrainName;
         Destination = snapshot.val().Destination;
-        firstTrain = snapshot.val().firstTrain;
-        Frequency = snapshot.val().Frequency;
+
         TrainArrival = snapshot.val().TrainArrival;
         MinsTillTrain = snapshot.val().MinsTillTrain;
 
+
+        firstTrain = snapshot.val().firstTrain;
+        Frequency = snapshot.val().Frequency;
+        trainCal();
         console.log(TrainName);
         console.log(Destination);
         console.log(firstTrain);
